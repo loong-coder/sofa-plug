@@ -86,6 +86,6 @@ excludeGroupIds=net.java.dev.jna*
 excludeGroupIds=com.google.errorprone*
 excludeGroupIds=com.github.oshi*
 excludeGroupIds=org.checkerframework*
-
+excludeGroupIds=io.swagger*
 
 excludeArtifactIds=fastjson
