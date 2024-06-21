@@ -3,6 +3,8 @@ package com.pimcenter.schedule.rest;
 
 import com.pimcenter.schedule.entity.City;
 import com.pimcenter.schedule.repository.CityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CityController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityController.class);
 
     @Autowired
     private CityRepository cityRepository;
@@ -18,6 +21,7 @@ public class CityController {
     //http://localhost:8888/saveCity?cityName=北京&cityIntroduce=中国首都
     @GetMapping(value = "saveCity")
     public String saveCity(String cityName, String cityIntroduce) {
+        LOGGER.info("save city:{}, {}", cityName, cityIntroduce);
         City city = new City(cityName, cityIntroduce);
         cityRepository.save(city);
         return "success";

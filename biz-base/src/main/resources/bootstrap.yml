@@ -6,27 +6,19 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
-        namespace: garen-mysql-dev
+        namespace: garen-kingbase-dev
         refresh-enabled: true
+        shared-configs[0]:
+          data-id: share-config.yaml
+          refresh: true
+          group: DEFAULT_GROUP
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: garen-mysql-dev
+        namespace: garen-kingbase-dev
       username: nacos
       password: nacos
-  datasource:
-    driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/biz-base?characterEncoding=utf8&useSSL=false
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database-platform: org.hibernate.dialect.MySQLDialect
 
 logging:
   file:
     path: ./logs/
   path: ./logs/
-
-server:
-  port: 9999

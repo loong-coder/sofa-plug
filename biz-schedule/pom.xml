@@ -24,6 +24,17 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alipay.sofa.koupleless</groupId>
+            <artifactId>koupleless-adapter-logback-spring-starter-3.0</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.alipay.sofa.koupleless</groupId>
@@ -36,13 +47,6 @@
         <dependency>
             <groupId>com.alipay.sofa</groupId>
             <artifactId>web-ark-plugin</artifactId>
-            <!-- 排除 web-ark-plugin 中 log-sofa-boot-starter -->
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alipay.sofa</groupId>
-                    <artifactId>log-sofa-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
             <scope>provided</scope>
         </dependency>
 
@@ -86,12 +90,37 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.alipay.sofa.koupleless</groupId>
             <artifactId>koupleless-app-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -113,8 +142,8 @@
                 <configuration>
                     <skipArkExecutable>true</skipArkExecutable>
                     <outputDirectory>./target</outputDirectory>
-                    <bizName>biz1-nacos</bizName>
-                    <webContextPath>schedule</webContextPath>
+                    <bizName>${spring.application.name}</bizName>
+                    <webContextPath>${server.servlet.context-path}</webContextPath>
                     <declaredMode>true</declaredMode>
                     <packExcludesConfig>rules.txt</packExcludesConfig>
                     <priority>200</priority>
@@ -123,6 +152,27 @@
                     <!--					静态合并部署需要配置-->
                     <!--					<attach>true</attach>-->
                 </configuration>
+            </plugin>
+
+            <!--映射 yml配置文件到POM中的插件-->
+            <plugin>
+                <groupId>it.ozimov</groupId>
+                <artifactId>yaml-properties-maven-plugin</artifactId>
+                <version>1.1.3</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <!-- 指定配置文件 -->
+                                <file>src/main/resources/bootstrap.yml</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -2,12 +2,15 @@ package com.pimcenter.base.rest;
 
 import com.pimcenter.base.entity.City;
 import com.pimcenter.base.repository.CityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CityController {
+public class DbController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DbController.class);
 
 
     @Autowired
@@ -17,6 +20,7 @@ public class CityController {
     //http://localhost:8888/saveCity?cityName=北京&cityIntroduce=中国首都
     @GetMapping(value = "saveCity")
     public String saveCity(String cityName, String cityIntroduce) {
+        LOGGER.info("save city:{}, {}", cityName, cityIntroduce);
         City city = new City(cityName, cityIntroduce);
         cityRepository.save(city);
         return "success";

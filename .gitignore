@@ -13,6 +13,9 @@ target/
 *.iml
 *.ipr
 
+### 过滤日志
+log/
+
 ### Eclipse ###
 .apt_generated
 .classpath
