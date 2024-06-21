@@ -1,6 +1,8 @@
 package com.pimcenter.schedule.rest;
 
 
+import com.pimcenter.base.service.CityService;
+import com.pimcenter.base.service.dto.CityDTO;
 import com.pimcenter.schedule.entity.City;
 import com.pimcenter.schedule.repository.CityRepository;
 import org.slf4j.Logger;
@@ -9,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class CityController {
 
@@ -16,6 +20,9 @@ public class CityController {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private CityService cityService;
 
 
     //http://localhost:8888/saveCity?cityName=北京&cityIntroduce=中国首都
@@ -47,5 +54,11 @@ public class CityController {
     public City getCityById(Integer cityId) {
         City city = cityRepository.findById(cityId).get();
         return city;
+    }
+
+    @GetMapping(value = "findAllCities")
+    public List<CityDTO> findAllCities() {
+        LOGGER.info("findAllCities");
+        return cityService.findAllCities();
     }
 }

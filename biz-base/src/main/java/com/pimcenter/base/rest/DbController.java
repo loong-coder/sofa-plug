@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class DbController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DbController.class);
@@ -46,5 +48,11 @@ public class DbController {
     public City getCityById(Integer cityId) {
         City city = cityRepository.findById(cityId).get();
         return city;
+    }
+
+    @GetMapping(value = "findAllCities")
+    public List<City> findAllCities() {
+        LOGGER.info("findAllCities base");
+        return cityRepository.findAll();
     }
 }

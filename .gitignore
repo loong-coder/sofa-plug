@@ -15,6 +15,7 @@ target/
 
 ### 过滤日志
 log/
+logs/
 
 ### Eclipse ###
 .apt_generated
