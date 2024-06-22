@@ -11,7 +11,6 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@ConditionalOnClass(OpenAPI.class)
 public class SwaggerConfig {
 
     /**
@@ -49,7 +47,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("XXX用户系统API")
+                        .title("Base API")
                         .version("1.0")
 
                         .description("Knife4j集成springdoc-openapi示例")

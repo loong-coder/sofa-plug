@@ -164,13 +164,26 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <!-- 以上内容当模块独立启用时需要配置，若只放在基座中，可以不用配置-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.xiaoymin</groupId>-->
-<!--            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-models-jakarta</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
