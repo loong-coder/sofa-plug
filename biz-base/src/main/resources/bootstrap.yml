@@ -15,7 +15,7 @@ spring:
       password: nacos
   datasource:
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/biz-base?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/biz-base?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: root
   jpa:
@@ -27,6 +27,3 @@ logging:
   file:
     path: ./logs/
   path: ./logs/
-
-server:
-  port: 9999

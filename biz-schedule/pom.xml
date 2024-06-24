@@ -94,6 +94,12 @@
             <artifactId>koupleless-app-starter</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.24</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -113,7 +119,7 @@
                 <configuration>
                     <skipArkExecutable>true</skipArkExecutable>
                     <outputDirectory>./target</outputDirectory>
-                    <bizName>biz1-nacos</bizName>
+                    <bizName>biz-schedule</bizName>
                     <webContextPath>schedule</webContextPath>
                     <declaredMode>true</declaredMode>
                     <packExcludesConfig>rules.txt</packExcludesConfig>
