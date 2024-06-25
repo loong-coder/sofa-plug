@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -15,7 +17,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableConfigurationProperties
 @EnableDiscoveryClient
 @EnableJpaRepositories(basePackages = {"com.pimcenter.schedule.repository"})
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        ElasticsearchRepositoriesAutoConfiguration.class,
+        ElasticsearchDataAutoConfiguration.class
+})
 @EnableFeignClients(basePackages = {"com.pimcenter.base"})
 public class ScheduleApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleApplication.class);

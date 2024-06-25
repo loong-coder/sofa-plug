@@ -34,6 +34,7 @@
         <project.encoding>UTF-8</project.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <guava.version>32.1.3-jre</guava.version>
+        <elasticsearch-java>7.17.5</elasticsearch-java>
     </properties>
 
     <modules>
@@ -176,6 +177,34 @@
                 <artifactId>swagger-models</artifactId>
                 <version>2.2.19</version>
             </dependency>
+
+
+
+            <!-- new Elasticsearch client, needs the low-level rest client and json api -->
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>${elasticsearch-java}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId> <!-- is Apache 2-->
+                <version>${elasticsearch-java}</version>
+            </dependency>
+
+            <!--  es 依赖 jna 版本较高，和logging相关依赖冲突，需要单独引入-->
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>5.14.0</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna-platform</artifactId>
+                <version>5.14.0</version>
+            </dependency>
+            <!--  es 依赖 jna 版本较高，和logging相关依赖冲突，需要单独引入-->
 
         </dependencies>
     </dependencyManagement>
