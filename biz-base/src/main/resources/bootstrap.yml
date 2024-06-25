@@ -30,6 +30,16 @@ springdoc:
       paths-to-match: '/**'
       packages-to-scan: com.pimcenter.base.rest
 
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:2222/xxl-job-admin
+    access-token: dasj2nd81jf9asjdkl5jk234
+    executor:
+      appname: ${spring.application.name}
+      port: -1
+
+
 logging:
   file:
     path: ./logs/

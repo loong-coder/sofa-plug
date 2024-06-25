@@ -206,6 +206,13 @@
             </dependency>
             <!--  es 依赖 jna 版本较高，和logging相关依赖冲突，需要单独引入-->
 
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.3.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
