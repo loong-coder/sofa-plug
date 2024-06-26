@@ -8,6 +8,7 @@ import com.mongodb.client.MongoClients;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
@@ -43,7 +44,12 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         return database;
     }
 
+    /**
+     * 一定要注册为bean，这样spring 容器销毁时才会自动释放资源
+     * @return
+     */
     @Override
+    @Bean
     public MongoClient mongoClient() {
         MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
 

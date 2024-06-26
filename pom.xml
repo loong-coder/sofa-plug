@@ -41,6 +41,7 @@
         <module>biz-base</module>
         <module>biz-schedule</module>
         <module>biz-base-feign</module>
+        <module>biz-adapter</module>
     </modules>
 
     <dependencyManagement>
