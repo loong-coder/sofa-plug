@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableDiscoveryClient
 @EnableJpaRepositories(basePackages = {"com.pimcenter.schedule.repository"})
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.pimcenter.base"})
+@EnableFeignClients(basePackages = {"com.pimcenter.base.service"})
 public class ScheduleApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleApplication.class);
 
