@@ -1,45 +1,32 @@
 package com.pimcenter.schedule.release;
 
-import com.alipay.sofa.ark.spi.event.biz.AfterBizStopEvent;
+import ch.qos.logback.classic.selector.ContextSelector;
+import ch.qos.logback.classic.util.ContextSelectorStaticBinder;
+import com.alipay.sofa.ark.spi.event.biz.BeforeBizRecycleEvent;
 import com.alipay.sofa.ark.spi.service.event.EventHandler;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.impl.Log4jContextFactory;
-import org.apache.logging.log4j.core.selector.ContextSelector;
-import org.apache.logging.log4j.spi.LoggerContextFactory;
+import com.alipay.sofa.koupleless.adapter.ArkLogbackContextSelector;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 /**
  * @ClassName BizRecyclePostHook
- * @Description TODO
+ * @Description ArkLogbackContextSelector移除对应 ClassLoader 的 Context
  * @Author yuanting.mao
  * @Date 2024/6/13 16:10
  * @Version 1.0
  */
 @Component
-public class ScheduleBizRecyclePostHook implements EventHandler<AfterBizStopEvent> {
+public class ScheduleBizRecyclePostHook implements EventHandler<BeforeBizRecycleEvent> {
     @Override
-    public void handleEvent(AfterBizStopEvent event) {
+    public void handleEvent(BeforeBizRecycleEvent event) {
         try {
-            ClassLoader bizClassLoader = event.getSource().getBizClassLoader();
-            LoggerContextFactory factory = LogManager.getFactory();
-            // see -> org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.toContextMapKey
-            String contextName = Integer.toHexString(System.identityHashCode(bizClassLoader));
-            System.out.printf("biz stop:%s \n", contextName);
-            ContextSelector selector = ((Log4jContextFactory) factory).getSelector();
-            List<LoggerContext> loggerContexts = selector.getLoggerContexts();
-            for (LoggerContext context : loggerContexts) {
-                if (context.getName().equals(contextName)) {
-                    boolean stop = context.stop(300, TimeUnit.MICROSECONDS);
-                    System.out.printf("Stop biz %s:%s log4j2 logger context, success=%b \n", contextName, stop, stop);
-                }
+            ContextSelector contextSelector = ContextSelectorStaticBinder.getSingleton().getContextSelector();
+            if (contextSelector instanceof ArkLogbackContextSelector) {
+                ClassLoader bizClassLoader = event.getSource().getBizClassLoader();
+                ((ArkLogbackContextSelector)contextSelector).removeContext(bizClassLoader);
             }
         } catch (Throwable e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

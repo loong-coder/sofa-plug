@@ -220,6 +220,12 @@
             <artifactId>xxl-job-core</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.alipay.sofa.koupleless</groupId>
+            <artifactId>koupleless-adapter-logback-spring-starter-3.0</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
